@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:text="Asignar Categoria"
+            android:text="Guardar Categoria"
             tools:layout_editor_absoluteX="220dp"
             tools:layout_editor_absoluteY="63dp" />
 
