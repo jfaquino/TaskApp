@@ -10,9 +10,23 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Categorias"
+        android:text="Registro de Categorias"
         android:textAlignment="center"
         android:textSize="24sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:text="Nombre:"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/txtNombreCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +36,7 @@
         tools:layout_editor_absoluteY="0dp">
 
         <Button
-            android:id="@+id/btnGuardar"
+            android:id="@+id/btnGuardarCategoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
