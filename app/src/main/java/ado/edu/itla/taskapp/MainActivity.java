@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import ado.edu.itla.taskapp.entidad.Categoria;
+import ado.edu.itla.taskapp.vista.CategoriaActivity;
 
 public class MainActivity extends AppCompatActivity {
 
