@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import ado.edu.itla.taskapp.entidad.Categoria;
 import ado.edu.itla.taskapp.vista.CategoriaActivity;
+import ado.edu.itla.taskapp.vista.CategoriaListaActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,16 +24,10 @@ public class MainActivity extends AppCompatActivity {
         btnCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,CategoriaActivity.class);
+                Intent intent = new Intent(MainActivity.this,CategoriaListaActivity.class);
                 startActivity(intent);
             }
         });
-
-        Categoria cat = new Categoria();
-
-        cat.setDescripcion("CATEGORIA 1");
-        cat.setId(2);
-        Log.i(LOG_TAG, cat.toString());
 
     }
 }

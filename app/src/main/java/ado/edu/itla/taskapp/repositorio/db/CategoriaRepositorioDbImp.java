@@ -76,10 +76,6 @@ public class CategoriaRepositorioDbImp implements CategoriaRepositorio {
             int id = cr.getInt(cr.getColumnIndex("id"));
             String  nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
 
-//            Categoria c = new Categoria();
-//            c.setId(id);
-//            c.setNombre(nombre);
-
             // Se añaden las categoria a la lista.
             categorias.add(new Categoria(id, nombre));
             cr.moveToNext();
