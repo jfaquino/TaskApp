@@ -49,7 +49,19 @@ public class CategoriaRepositorioDbImp implements CategoriaRepositorio {
     @Override
 
     public boolean actualizar(Categoria categoria) {
-        return false;
+
+        if (categoria.getId() != null && categoria.getId() > 0)
+            return  actualizar(categoria);
+
+        ContentValues cv = new ContentValues();
+        cv.put(CAMPO_NOMBRE, categoria.getNombre());
+
+        SQLiteDatabase db = conexionDb.getWritableDatabase();
+        int cantidad = db.update(TABLA_CATEGORIA, cv, "id = ?", new String[]{categoria.getId().toString()} );
+
+        db.close();
+
+        return cantidad > 0;
     }
 
     @Override

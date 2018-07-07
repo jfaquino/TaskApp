@@ -41,14 +41,15 @@ public class CategoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (categoria == null)
-                    categoria  = new Categoria();
-
+                if (categoria == null) {
+                    categoria = new Categoria();
+                }
                 categoria.setNombre(txtNombre.getText().toString());
 
                 Log.i(LOG_TAG,categoria.toString());
 
                 categoriaRepositorio.guardar(categoria);
+
                 Log.i(LOG_TAG, categoria.toString());
             }
         });
