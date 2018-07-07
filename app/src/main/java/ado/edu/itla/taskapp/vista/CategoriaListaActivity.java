@@ -1,7 +1,10 @@
 package ado.edu.itla.taskapp.vista;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -26,7 +29,15 @@ public class CategoriaListaActivity extends AppCompatActivity {
         ListView catListView = (ListView) findViewById(R.id.categoria_listview);
         catListView.setAdapter(new CategoriaListAdapter(this, categorias));
 
+        catListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
+                Categoria cat = (Categoria)adapterView.getItemAtPosition(i);
+                Intent regCatIntent = new Intent(CategoriaListaActivity.this, CategoriaActivity.class);
+                regCatIntent.putExtra("categoria", cat);
+                startActivity(regCatIntent);
+            }
+        });
     }
 }

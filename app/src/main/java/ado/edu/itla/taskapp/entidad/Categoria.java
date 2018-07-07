@@ -1,10 +1,12 @@
 package ado.edu.itla.taskapp.entidad;
 
+import java.io.Serializable;
+
 /**
  * Created by MESCyT on 9/6/2018.
  */
 
-public class Categoria {
+public class Categoria implements Serializable {
 
     private Integer id;
     private String nombre;

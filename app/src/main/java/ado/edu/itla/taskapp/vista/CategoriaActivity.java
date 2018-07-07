@@ -16,6 +16,7 @@ public class CategoriaActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "CategoriaActivity";
     private CategoriaRepositorio categoriaRepositorio;
+    private Categoria categoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +25,25 @@ public class CategoriaActivity extends AppCompatActivity {
 
         categoriaRepositorio =  new CategoriaRepositorioDbImp(this);
 
+
         final EditText txtNombre =  (EditText) findViewById(R.id.txtNombreCategoria);
         Button btnGuardar = (Button) findViewById(R.id.btnGuardarCategoria);
+
+        Bundle paraBundle = getIntent().getExtras();
+        if (paraBundle!=null && paraBundle.containsKey("categoria"))
+        {
+            categoria = (Categoria) paraBundle.getSerializable("categoria");
+            txtNombre.setText(categoria.getNombre());
+            btnGuardar.setText("Actualizar");
+        }
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Categoria categoria = new Categoria();
+                if (categoria == null)
+                    categoria  = new Categoria();
+
                 categoria.setNombre(txtNombre.getText().toString());
 
                 Log.i(LOG_TAG,categoria.toString());
