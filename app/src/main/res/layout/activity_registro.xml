@@ -110,19 +110,33 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rbtnTipoTecnico"
-                android:layout_weight=".50"
+            <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Tecnico" />
+                android:layout_height="match_parent"
+                android:layout_weight=".50"
+                android:checkedButton="@+id/rbtnTipoTecnico"
+                android:clickable="false"
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rbtnTipoNormal"
-                android:layout_weight=".50"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Normal" />
+                <RadioButton
+                    android:id="@+id/rbtnTipoTecnico"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:text="Tecnico" />
+
+                <RadioButton
+                    android:id="@+id/rbtnTipoNormal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:text="Normal" />
+
+
+            </RadioGroup>
+
+
 
         </LinearLayout>
     </LinearLayout>

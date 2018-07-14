@@ -10,6 +10,7 @@ import android.widget.Button;
 import ado.edu.itla.taskapp.entidad.Categoria;
 import ado.edu.itla.taskapp.vista.CategoriaActivity;
 import ado.edu.itla.taskapp.vista.CategoriaListaActivity;
+import ado.edu.itla.taskapp.vista.LogInActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         btnCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,CategoriaListaActivity.class);
+                Intent intent = new Intent(MainActivity.this,LogInActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,61 @@
 package ado.edu.itla.taskapp.vista;
 
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.content.Intent;
+import android.widget.RadioButton;
+
+import ado.edu.itla.taskapp.R;
+import ado.edu.itla.taskapp.entidad.Usuario;
+import ado.edu.itla.taskapp.repositorio.UsuarioRepositorio;
+import ado.edu.itla.taskapp.repositorio.db.UsuarioRepositorioDbImp;
 
 public class RegistroActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = "RegistroActivity";
+    private Usuario usuario;
+    private UsuarioRepositorio usuarioRepositorio;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registro);
+
+        usuarioRepositorio = new UsuarioRepositorioDbImp(this);
+
+        Button btnRegistrar = findViewById(R.id.btnRegistrar);
+        final EditText txtNombreUsuario = (EditText) findViewById(R.id.txtNombreUsuario);
+        final EditText txtEmailUsuario = (EditText) findViewById(R.id.txtEmailUsuario);
+        final EditText txtContrasena = (EditText) findViewById(R.id.txtContrasena);
+        final EditText txtContrasenaConfirmacion = (EditText) findViewById(R.id.txtContrasenaConfirmacion);
+        final RadioButton rbtnTecnico = (RadioButton) findViewById(R.id.rbtnTipoTecnico);
+        final RadioButton rbtnNormal = (RadioButton) findViewById(R.id.rbtnTipoNormal);
+
+
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                usuario.setEmail(txtEmailUsuario.getText().toString());
+                usuario.setNombre(txtNombreUsuario.getText().toString());
+                usuario.setContrasena(txtContrasena.getText().toString());
+                if(rbtnNormal.isChecked())
+                    usuario.setTipoUsuario(Usuario.TipoUsuario.valueOf(rbtnNormal.getText().toString()));
+                else
+                    usuario.setTipoUsuario(Usuario.TipoUsuario.valueOf(rbtnTecnico.getText().toString()));
+
+                Log.i(LOG_TAG, usuario.toString());
+
+                usuarioRepositorio.guardar(usuario);
+
+                Log.i(LOG_TAG, usuario.toString());
+            }
+        });
+    }
+
+
 }

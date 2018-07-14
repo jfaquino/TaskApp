@@ -21,6 +21,10 @@ public class Usuario implements Serializable{
 
     private TipoUsuario tipoUsuario;
 
+    public Usuario() {
+
+    }
+
     public Usuario(Integer id, String nombre, String email, String contrasena, TipoUsuario tipoUsuario) {
         this.id = id;
         this.nombre = nombre;
