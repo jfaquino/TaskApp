@@ -37,6 +37,7 @@ public class UsuarioRepositorioDbImp implements UsuarioRepositorio {
          cv.put(CAMPO_TIPOUSUARIO, usuario.getTipoUsuario().name());
 
         SQLiteDatabase db = conexionDb.getWritableDatabase();
+//        db.execSQL("CREATE TABLE usuario ( id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, email TEXT, contrasena TEXT, tipoUsuario TEXT)");
 
         if (usuario.getId() != null && usuario.getId() > 0){
             int cantidad = db.update(TABLA_USUARIO, cv, "id = ?", new String[]{usuario.getId().toString()});

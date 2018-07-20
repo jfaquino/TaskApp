@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import ado.edu.itla.taskapp.R;
 import ado.edu.itla.taskapp.entidad.Usuario;
@@ -34,19 +35,29 @@ public class RegistroActivity extends AppCompatActivity {
         final EditText txtContrasenaConfirmacion = (EditText) findViewById(R.id.txtContrasenaConfirmacion);
         final RadioButton rbtnTecnico = (RadioButton) findViewById(R.id.rbtnTipoTecnico);
         final RadioButton rbtnNormal = (RadioButton) findViewById(R.id.rbtnTipoNormal);
+        final TextView txtValidacionContrasena = findViewById(R.id.txtValidacionContrasena);
 
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                usuario.setEmail(txtEmailUsuario.getText().toString());
+                if (usuario == null) {
+                    usuario = new Usuario();
+                }
+
                 usuario.setNombre(txtNombreUsuario.getText().toString());
+                usuario.setEmail(txtEmailUsuario.getText().toString());
                 usuario.setContrasena(txtContrasena.getText().toString());
                 if(rbtnNormal.isChecked())
-                    usuario.setTipoUsuario(Usuario.TipoUsuario.valueOf(rbtnNormal.getText().toString()));
+                    usuario.setTipoUsuario(Usuario.TipoUsuario.valueOf(rbtnNormal.getText().toString().toUpperCase()));
                 else
-                    usuario.setTipoUsuario(Usuario.TipoUsuario.valueOf(rbtnTecnico.getText().toString()));
+                    usuario.setTipoUsuario(Usuario.TipoUsuario.valueOf(rbtnTecnico.getText().toString().toUpperCase()));
+
+//                if (txtContrasena.getText() != txtContrasenaConfirmacion.getText()){
+//                    txtValidacionContrasena.sett
+//
+//                }
 
                 Log.i(LOG_TAG, usuario.toString());
 

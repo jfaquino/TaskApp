@@ -11,6 +11,7 @@ import ado.edu.itla.taskapp.R;
 import ado.edu.itla.taskapp.entidad.Categoria;
 import ado.edu.itla.taskapp.repositorio.CategoriaRepositorio;
 import ado.edu.itla.taskapp.repositorio.db.CategoriaRepositorioDbImp;
+import ado.edu.itla.taskapp.repositorio.db.ConexionDb;
 
 public class CategoriaActivity extends AppCompatActivity {
 
@@ -40,6 +41,7 @@ public class CategoriaActivity extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 if (categoria == null) {
                     categoria = new Categoria();
