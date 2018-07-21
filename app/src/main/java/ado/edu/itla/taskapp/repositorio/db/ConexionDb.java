@@ -13,7 +13,7 @@ public class ConexionDb extends SQLiteOpenHelper{
 
     private static final String LOG_TAG = "ConexionDb";
     private static final String NOMBRE_DB = "taskapp.db";
-    private static final int VERSION_DB = 1;
+    private static final int VERSION_DB = 2;
 
     public ConexionDb(Context context) {
         super(context, NOMBRE_DB, null, VERSION_DB);
@@ -26,10 +26,15 @@ public class ConexionDb extends SQLiteOpenHelper{
 
         db.execSQL(EstructuraDb.TABLA_CATEGORIA);
         db.execSQL(EstructuraDb.TABLA_USUARIO);
+        db.execSQL(EstructuraDb.TABLA_TAREA);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        if( oldVersion < newVersion){
+            onCreate(db);
+        }
 
     }
 }

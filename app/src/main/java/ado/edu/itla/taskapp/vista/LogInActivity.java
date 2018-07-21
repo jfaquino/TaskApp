@@ -28,6 +28,15 @@ public class LogInActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button btnIniciar = findViewById(R.id.btnIniciar);
+        btnIniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LogInActivity.this, TareaAsignarActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     
 }

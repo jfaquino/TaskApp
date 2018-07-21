@@ -1,12 +1,13 @@
 package ado.edu.itla.taskapp.entidad;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by MESCyT on 7/7/2018.
  */
 
-public class Tarea {
+public class Tarea implements Serializable{
 
     enum TareaEstado{
         PENDIENTE, EN_PROCESO, TERMINADO
