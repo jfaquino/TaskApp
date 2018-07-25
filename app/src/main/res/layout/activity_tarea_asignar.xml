@@ -20,7 +20,7 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="Seleecione una categoria"/>
+            android:id="@+id/spnCategoria"/>
 
     </LinearLayout>
 
@@ -36,7 +36,8 @@
 
         <Spinner
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/spnUsuarioTecnico"/>
 
     </LinearLayout>
 

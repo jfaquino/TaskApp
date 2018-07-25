@@ -110,7 +110,34 @@ public class UsuarioRepositorioDbImp implements UsuarioRepositorio {
     }
 
     @Override
-    public List<Usuario> buscarTecnicos(String nombre) {
-        return null;
+    public List<Usuario> buscarTecnicos(String buscar) {
+
+         //TODO: buscar los Tecnicos por nombre (LIKE)
+        List<Usuario> usuarios = new ArrayList();
+
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+        String[] columnas = {"id", CAMPO_NOMBRE,CAMPO_EMAIL,CAMPO_TIPOUSUARIO};
+        String[] tecnico = {"TECNICO"};
+        Cursor cr = db.query(TABLA_USUARIO, columnas, CAMPO_TIPOUSUARIO + " = ?", tecnico, null, null, null);
+
+        cr.moveToFirst();
+
+        while (cr.moveToNext()){
+
+            //Buscamos los campos en cada registro.
+            int id = cr.getInt(cr.getColumnIndex("id"));
+            String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+            String email = cr.getString(cr.getColumnIndex(CAMPO_EMAIL));
+            String tipoUsuario = cr.getString(cr.getColumnIndex(CAMPO_TIPOUSUARIO));
+
+            //Se añaden los valores a la lista
+            usuarios.add(new Usuario(id, nombre, email, null, Usuario.TipoUsuario.valueOf(tipoUsuario)));
+            cr.moveToNext();
+
+        }
+
+        cr.close();
+        db.close();
+        return usuarios;
     }
 }

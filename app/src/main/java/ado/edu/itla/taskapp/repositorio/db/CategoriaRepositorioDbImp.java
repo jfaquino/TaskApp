@@ -90,7 +90,7 @@ public class CategoriaRepositorioDbImp implements CategoriaRepositorio {
             int id = cr.getInt(cr.getColumnIndex("id"));
             String  nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
 
-            // Se añaden las categoria a la lista.
+            // Se añaden los valores a la lista.
             categorias.add(new Categoria(id, nombre));
             cr.moveToNext();
         }
