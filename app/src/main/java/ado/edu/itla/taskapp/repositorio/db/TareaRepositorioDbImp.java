@@ -1,6 +1,10 @@
 package ado.edu.itla.taskapp.repositorio.db;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -31,6 +35,34 @@ public class TareaRepositorioDbImp implements TareaRepositorio {
     }
     @Override
     public boolean guardar(Tarea tarea) {
+
+        ContentValues cv = new ContentValues();
+        cv.put(CAMPO_NOMBRE, tarea.getNombre());
+        cv.put(CAMPO_DESCRIPCION, tarea.getDescripcion());
+        cv.put(CAMPO_FECHA, tarea.getFecha().getTime());
+        cv.put(CAMPO_FECHA_COMPLETADO, tarea.getFechaTerminado().getTime());
+        cv.put(CAMPO_ESTADO, tarea.getEstado().name());
+        cv.put(CAMPO_USUARIO_CREADOR_ID, tarea.getUsuarioCreador().getId());
+        cv.put(CAMPO_USUARIO_ASIGNADO_ID, tarea.getUsuarioAsignado().getId());
+        cv.put(CAMPO_CATEGORIA_ID, tarea.getCategoria().getId());
+
+        SQLiteDatabase db = conexionDb.getWritableDatabase();
+
+        if(tarea.getId() != null && tarea.getId() > 0){
+            int cantidad = db.update(TABLA_TAREA,cv, "id = ?", new String[]{tarea.getId().toString()});
+            db.close();
+            return cantidad > 0;
+        }
+        else {
+            Long id = db.insert(TABLA_TAREA, null, cv);
+            db.close();
+
+            if(id.intValue() > 0){
+                tarea.setId(id.intValue());
+                return true;
+            }
+        }
+
         return false;
     }
 

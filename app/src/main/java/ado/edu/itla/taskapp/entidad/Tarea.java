@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class Tarea implements Serializable{
 
-    enum TareaEstado{
+    public enum TareaEstado{
         PENDIENTE, EN_PROCESO, TERMINADO
     }
 
@@ -18,7 +18,7 @@ public class Tarea implements Serializable{
     private String descripcion;
     private Date fecha;
     private Date fechaTerminado;
-    private  TareaEstado estado;
+    private TareaEstado estado;
     private Categoria categoria;
     private Usuario usuarioCreador;
     private Usuario usuarioAsignado;
