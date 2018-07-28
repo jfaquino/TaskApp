@@ -1,11 +1,13 @@
 package ado.edu.itla.taskapp.repositorio.db;
 
+import android.animation.TypeConverter;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
+import java.util.Date;
 import java.util.List;
 
 import ado.edu.itla.taskapp.entidad.Categoria;
@@ -73,7 +75,48 @@ public class TareaRepositorioDbImp implements TareaRepositorio {
 
     @Override
     public List<Tarea> buscarAsignada(Usuario usuario) {
-        return null;
+       List<Tarea> tareas = new ArrayList<>();
+
+
+       String sql = "Select t.*, uc.nombre as nombre_usuario, c.nombre as nombre_cat from tarea t inner join usuario uc on (t.usuario_creador_id = uc.id) " +
+               "inner join categoria c on (t.categoria_id = c.id) Where t.usuario_asignada_id=?";
+       SQLiteDatabase db = conexionDb.getReadableDatabase();
+       String[] args = {usuario.getId().toString()};
+       Cursor cr = db.rawQuery(sql, args);
+
+       while (cr.moveToNext()){
+           int id = cr.getInt(cr.getColumnIndex("id"));
+           String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+           String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
+           Long fecha = cr.getLong(cr.getColumnIndex(CAMPO_FECHA));
+           String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
+
+
+           Usuario usuarioCreador = new Usuario();
+           usuarioCreador.setId(cr.getInt(cr.getColumnIndex(CAMPO_USUARIO_CREADOR_ID)));
+           usuarioCreador.setNombre(cr.getString(cr.getColumnIndex("nombre_usuario")));
+
+           Categoria categoria = new Categoria();
+           categoria.setId(cr.getInt(cr.getColumnIndex(CAMPO_CATEGORIA_ID)));
+           categoria.setNombre(cr.getString(cr.getColumnIndex("nombre_cat")));
+
+           Date fechaCreada = new Date(fecha);
+
+           Tarea t = new Tarea();
+           t.setId(id);
+           t.setNombre(nombre);
+           t.setDescripcion(descripcion);
+           t.setFecha(fechaCreada);
+           t.setEstado(Tarea.TareaEstado.valueOf(estado));
+           t.setUsuarioCreador(usuarioCreador);
+           t.setUsuarioAsignado(usuario);
+           t.setCategoria(categoria);
+       }
+
+       cr.close();
+       db.close();
+
+       return tareas;
     }
 
     @Override

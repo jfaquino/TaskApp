@@ -24,8 +24,7 @@ public class TareaAsignarActivity extends AppCompatActivity {
 
     private CategoriaRepositorio categoriaRepositorio;
     private UsuarioRepositorio usuarioRepositorio;
-    private List<Categoria> categorias;
-    private List<Usuario> usuarios;
+
 
     Spinner spnCategorias, spnUsuarioTecnico;
     ArrayList<String> listaCategoria, listaUsuario;
@@ -39,70 +38,74 @@ public class TareaAsignarActivity extends AppCompatActivity {
         usuarioRepositorio = new UsuarioRepositorioDbImp(this);
 
         //Obtiene y muestra la Lista de Categorias
-        categorias = categoriaRepositorio.buscar(null);
+        List<Categoria> categorias = categoriaRepositorio.buscar(null);
         spnCategorias = findViewById(R.id.spnCategoria);
-        obtenerListaCategorias();
-        ArrayAdapter<CharSequence> adaptadorCategoria = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaCategoria);
+//        obtenerListaCategorias();
+        ArrayAdapter<Categoria> adaptadorCategoria = new ArrayAdapter(this,android.R.layout.simple_spinner_item,categorias);
         spnCategorias.setAdapter(adaptadorCategoria);
 
-        //Obtiene la Categoria seleccionada
-        spnCategorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0){
-                    Categoria categoriaSeleccionada = categorias.get(position-1);
-                    Log.i("Prueba", categoriaSeleccionada.getId().toString() + " - " + categoriaSeleccionada.getNombre());
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        //Obtiene la Categoria seleccionada
+//        spnCategorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if(position != 0){
+//                    Categoria categoriaSeleccionada = categorias.get(position-1);
+//                    Log.i("Prueba", categoriaSeleccionada.getId().toString() + " - " + categoriaSeleccionada.getNombre());
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         //Obtiene y muestra la Lista de Usuarios Tecnicos
-        usuarios = usuarioRepositorio.buscarTecnicos(null);
+        List<Usuario> usuarios = usuarioRepositorio.buscarTecnicos(null);
         spnUsuarioTecnico = findViewById(R.id.spnUsuarioTecnico);
-        obtenerListaUsuariosTecnicos();
-        ArrayAdapter<CharSequence> adaptadorUsuarioTecnico = new ArrayAdapter(this,android.R.layout.simple_spinner_item,listaUsuario);
+//        obtenerListaUsuariosTecnicos();
+        ArrayAdapter<Usuario> adaptadorUsuarioTecnico = new ArrayAdapter(this,android.R.layout.simple_spinner_item,usuarios);
         spnUsuarioTecnico.setAdapter(adaptadorUsuarioTecnico);
 
-        //Obtiene el Usuario seleccionado
-        spnUsuarioTecnico.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0){
-                    Usuario usuarioTecnicoSeleccionado = usuarios.get(position-1);
-                    Log.i("PRUEBA", usuarioTecnicoSeleccionado.getId().toString() + " - " + usuarioTecnicoSeleccionado.getNombre());
-                }
-            }
+//        //Obtiene el Usuario seleccionado
+//        spnUsuarioTecnico.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if(position != 0){
+//                    Usuario usuarioTecnicoSeleccionado = usuarios.get(position-1);
+//                    Log.i("PRUEBA", usuarioTecnicoSeleccionado.getId().toString() + " - " + usuarioTecnicoSeleccionado.getNombre());
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
 
-    }
-
-    private void obtenerListaCategorias(){
-        listaCategoria = new ArrayList<String>();
-        listaCategoria.add("Seleccione una Categoria");
-
-        for(int i=0; i < categorias.size();i++){
-            listaCategoria.add(categorias.get(i).getId() + " - " + categorias.get(i).getNombre());
-        }
+//           Categoria cat = (Categoria) spnCategorias.getSelectedItem();
 
     }
 
-    private void obtenerListaUsuariosTecnicos(){
-        listaUsuario = new ArrayList<String>();
-        listaUsuario.add("Seleccione un Técnico");
-
-        for(int i = 0; i < usuarios.size(); i++){
-            listaUsuario.add(usuarios.get(i).getId() + " - " + usuarios.get(i).getNombre());
-        }
-
-    }
+//    private void obtenerListaCategorias(){
+//        listaCategoria = new ArrayList<String>();
+//        listaCategoria.add("Seleccione una Categoria");
+//
+//        for(int i=0; i < categorias.size();i++){
+//            listaCategoria.add(categorias.get(i).getId() + " - " + categorias.get(i).getNombre());
+//        }
+//
+//    }
+//
+//    private void obtenerListaUsuariosTecnicos(){
+//        listaUsuario = new ArrayList<String>();
+//        listaUsuario.add("Seleccione un Técnico");
+//
+//        for(int i = 0; i < usuarios.size(); i++){
+//            listaUsuario.add(usuarios.get(i).getId() + " - " + usuarios.get(i).getNombre());
+//        }
+//
+//    }
 }

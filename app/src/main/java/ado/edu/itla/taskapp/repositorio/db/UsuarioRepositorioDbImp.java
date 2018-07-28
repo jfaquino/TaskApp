@@ -116,10 +116,8 @@ public class UsuarioRepositorioDbImp implements UsuarioRepositorio {
 
         SQLiteDatabase db = conexionDb.getReadableDatabase();
         String[] columnas = {"id", CAMPO_NOMBRE,CAMPO_EMAIL,CAMPO_TIPOUSUARIO};
-        String[] tecnico = {"TECNICO"};
+        String[] tecnico = {Usuario.TipoUsuario.TECNICO.toString()};
         Cursor cr = db.query(TABLA_USUARIO, columnas, CAMPO_TIPOUSUARIO + " = ?", tecnico, null, null, null);
-
-        cr.moveToFirst();
 
         while (cr.moveToNext()){
 
@@ -131,8 +129,6 @@ public class UsuarioRepositorioDbImp implements UsuarioRepositorio {
 
             //Se añaden los valores a la lista
             usuarios.add(new Usuario(id, nombre, email, null, Usuario.TipoUsuario.valueOf(tipoUsuario)));
-            cr.moveToNext();
-
         }
 
         cr.close();

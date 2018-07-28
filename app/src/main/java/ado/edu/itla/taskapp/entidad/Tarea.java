@@ -23,6 +23,9 @@ public class Tarea implements Serializable{
     private Usuario usuarioCreador;
     private Usuario usuarioAsignado;
 
+    public Tarea(){}
+
+
     public Integer getId() {
         return id;
     }
