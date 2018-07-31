@@ -37,40 +37,45 @@ public class Usuario implements Serializable{
         return id;
     }
 
-    public void setId(Integer id) {
+    public Usuario setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public Usuario setNombre(String nombre) {
         this.nombre = nombre;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Usuario setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getContrasena() {
         return contrasena;
     }
 
-    public void setContrasena(String contrasena) {
+    public Usuario setContrasena(String contrasena) {
         this.contrasena = contrasena;
+        return this;
     }
 
     public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+    public Usuario setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+        return this;
     }
 
     @Override

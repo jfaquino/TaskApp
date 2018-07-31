@@ -32,7 +32,7 @@ public class UsuarioRepositorioDbImp implements UsuarioRepositorio {
 
          ContentValues cv = new ContentValues();
          cv.put(CAMPO_NOMBRE, usuario.getNombre());
-         cv.put(CAMPO_EMAIL, usuario.getEmail());
+         cv.put(CAMPO_EMAIL, usuario.getEmail().toLowerCase());
          cv.put(CAMPO_CONTRASENA, usuario.getContrasena());
          cv.put(CAMPO_TIPOUSUARIO, usuario.getTipoUsuario().name());
 
@@ -83,29 +83,46 @@ public class UsuarioRepositorioDbImp implements UsuarioRepositorio {
     @Override
     public Usuario buscar(String userName) {
 
-        List<Usuario> usuarios = new ArrayList<>();
+//        List<Usuario> usuarios = new ArrayList();
+        Usuario usuario = new Usuario();
 
         SQLiteDatabase db = conexionDb.getReadableDatabase();
         String[] columnas = {"id", CAMPO_NOMBRE, CAMPO_EMAIL, CAMPO_CONTRASENA , CAMPO_TIPOUSUARIO};
-        String[] args = new String[]{userName};
+        String[] args = new String[]{userName.toLowerCase()};
         Cursor cr = db.query(TABLA_USUARIO, columnas, CAMPO_EMAIL + " = ?", args , null, null, null);
-        cr.moveToFirst();
 
-        while (!cr.isAfterLast()) {
+        if (cr.moveToFirst() && cr.getCount() >= 1){
             int id = cr.getInt(cr.getColumnIndex("id"));
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE) );
             String email = cr.getString(cr.getColumnIndex(CAMPO_EMAIL) );
             String contrasena = cr.getString(cr.getColumnIndex(CAMPO_CONTRASENA) );
             String tipoUsuario = cr.getString(cr.getColumnIndex(CAMPO_TIPOUSUARIO) );
 
+            usuario = usuario.setId(id).setNombre(nombre).setEmail(email).setContrasena(contrasena).setTipoUsuario(Usuario.TipoUsuario.valueOf(tipoUsuario));
+            cr.close();
+            db.close();
+            return usuario;
 
-            usuarios.add( new Usuario(id, nombre, email,  contrasena, Usuario.TipoUsuario.valueOf(tipoUsuario)));
-            cr.moveToNext();
         }
-        cr.close();
-        db.close();
+        else {
+            return null;
+        }
 
-        return (Usuario) usuarios;
+//        while (!cr.isAfterLast()) {
+//            int id = cr.getInt(cr.getColumnIndex("id"));
+//            String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE) );
+//            String email = cr.getString(cr.getColumnIndex(CAMPO_EMAIL) );
+//            String contrasena = cr.getString(cr.getColumnIndex(CAMPO_CONTRASENA) );
+//            String tipoUsuario = cr.getString(cr.getColumnIndex(CAMPO_TIPOUSUARIO) );
+//
+//
+//            usuarios.add( new Usuario(id, nombre, email,  contrasena, Usuario.TipoUsuario.valueOf(tipoUsuario)));
+//            cr.moveToNext();
+//        }
+//        cr.close();
+//        db.close();
+
+
     }
 
     @Override
