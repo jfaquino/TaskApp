@@ -74,7 +74,6 @@ public class UsuarioRepositorioDbImp implements UsuarioRepositorio {
              String email = cr.getString(cr.getColumnIndex(CAMPO_EMAIL) );
              String contrasena = cr.getString(cr.getColumnIndex(CAMPO_CONTRASENA) );
              String tipoUsuario = cr.getString(cr.getColumnIndex(CAMPO_TIPOUSUARIO) );
-//             Usuario.TipoUsuario tipoUsuario = Usuario.TipoUsuario.valueOf(cr.getString(cr.getColumnIndex(CAMPO_TIPOUSUARIO)));
              usuario = new Usuario(id,nombre,email,contrasena,Usuario.TipoUsuario.valueOf(tipoUsuario));
          }
 

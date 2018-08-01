@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import ado.edu.itla.taskapp.MainActivity;
 import ado.edu.itla.taskapp.R;
 import ado.edu.itla.taskapp.entidad.Usuario;
+import ado.edu.itla.taskapp.entidad.UsuarioLogeado;
 import ado.edu.itla.taskapp.repositorio.UsuarioRepositorio;
 import ado.edu.itla.taskapp.repositorio.db.UsuarioRepositorioDbImp;
 
@@ -43,14 +46,35 @@ public class LogInActivity extends AppCompatActivity {
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(LogInActivity.this, TareaAsignarActivity.class);
-//                startActivity(intent);
 
                 final EditText txtEmailUsuario = (EditText) findViewById(R.id.txtNombreUsuario);
-                Usuario xd =(Usuario) usuarioRepositorio.buscar(txtEmailUsuario.getText().toString());
-                if (xd != null){
-                    Log.i(LOG_TAG, xd.getId().toString() + " - " + xd.getEmail());
+                final EditText txtContrasenaUsuario = (EditText) findViewById(R.id.txtNombreContrasena);
+                final TextView lblErrorLogin = (TextView) findViewById(R.id.lblErrorLogin);
+
+                Usuario us =(Usuario) usuarioRepositorio.buscar(txtEmailUsuario.getText().toString());
+//                UsuarioLogeado usuarioLogeado = UsuarioLogeado.getInstance(us);
+                if (us != null){
+                    Log.i(LOG_TAG, us.getId().toString() + " - " + us.getEmail() + " - " + us.getNombre() + " - " + us.getContrasena());
+
+                    if(us.getContrasena().equals(txtContrasenaUsuario.getText().toString()) && us.getTipoUsuario().equals(Usuario.TipoUsuario.NORMAL)) {
+                        Intent intent = new Intent(LogInActivity.this, TareaAsignarActivity.class);
+                        startActivity(intent);
+                    }
+                    else if (us.getContrasena().equals(txtContrasenaUsuario.getText().toString()) && us.getTipoUsuario().equals(Usuario.TipoUsuario.TECNICO)){
+                        Intent intent = new Intent(LogInActivity.this, TareaDetalleActivity.class);
+                        startActivity(intent);
+                    }
+
+                    else {
+                        lblErrorLogin.setText("Usuario y contraseña no coinciden, Favor intentar nuevamente.");
+                        Log.i(LOG_TAG, "El if te esta dando problemas papu");
+                    }
                 }
+                else{
+                    lblErrorLogin.setText("Usuario y contraseña no coinciden, Favor intentar nuevamente.");
+                }
+
+
 
             }
         });

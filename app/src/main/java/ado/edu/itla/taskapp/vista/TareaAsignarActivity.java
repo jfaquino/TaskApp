@@ -54,8 +54,9 @@ public class TareaAsignarActivity extends AppCompatActivity {
                     Categoria cat = (Categoria) spnCategorias.getSelectedItem();
                     Log.i(LOG_TAG, cat.getId().toString() + " - " + cat.getNombre());
 
-//                    Categoria categoriaSeleccionada = categorias.get(position-1);
-//                    Log.i("Prueba", categoriaSeleccionada.getId().toString() + " - " + categoriaSeleccionada.getNombre());
+                    UsuarioLogeado u = UsuarioLogeado.getInstance();
+                    if(u.getId() != null)
+                        Log.i(LOG_TAG, u.getNombre());
                 }
             }
 

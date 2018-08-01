@@ -43,7 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textEmailAddress|textPersonName" />
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/lblErrorLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/colorAccent"/>
     </LinearLayout>
 
     <LinearLayout
