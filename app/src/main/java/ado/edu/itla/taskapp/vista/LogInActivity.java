@@ -52,8 +52,8 @@ public class LogInActivity extends AppCompatActivity {
                 final TextView lblErrorLogin = (TextView) findViewById(R.id.lblErrorLogin);
 
                 Usuario us =(Usuario) usuarioRepositorio.buscar(txtEmailUsuario.getText().toString());
-//                UsuarioLogeado usuarioLogeado = UsuarioLogeado.getInstance(us);
                 if (us != null){
+                    UsuarioLogeado usuarioLogeado = UsuarioLogeado.getInstance(us);
                     Log.i(LOG_TAG, us.getId().toString() + " - " + us.getEmail() + " - " + us.getNombre() + " - " + us.getContrasena());
 
                     if(us.getContrasena().equals(txtContrasenaUsuario.getText().toString()) && us.getTipoUsuario().equals(Usuario.TipoUsuario.NORMAL)) {
