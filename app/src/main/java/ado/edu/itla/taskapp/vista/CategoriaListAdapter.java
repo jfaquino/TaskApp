@@ -45,7 +45,7 @@ public class CategoriaListAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        //TODO: Validr si view no es nulo
+        //TODO: Validar si view no es nulo
 
         if(view == null){
 

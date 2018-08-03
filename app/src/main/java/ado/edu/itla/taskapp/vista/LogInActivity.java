@@ -57,7 +57,7 @@ public class LogInActivity extends AppCompatActivity {
                     Log.i(LOG_TAG, us.getId().toString() + " - " + us.getEmail() + " - " + us.getNombre() + " - " + us.getContrasena());
 
                     if(us.getContrasena().equals(txtContrasenaUsuario.getText().toString()) && us.getTipoUsuario().equals(Usuario.TipoUsuario.NORMAL)) {
-                        Intent intent = new Intent(LogInActivity.this, TareaAsignarActivity.class);
+                        Intent intent = new Intent(LogInActivity.this, TareaUsuarioNormalActivity.class);
                         startActivity(intent);
                     }
                     else if (us.getContrasena().equals(txtContrasenaUsuario.getText().toString()) && us.getTipoUsuario().equals(Usuario.TipoUsuario.TECNICO)){

@@ -113,6 +113,8 @@ public class TareaRepositorioDbImp implements TareaRepositorio {
            t.setUsuarioCreador(usuarioCreador);
            t.setUsuarioAsignado(usuario);
            t.setCategoria(categoria);
+
+           tareas.add(t);
        }
 
        cr.close();
@@ -123,6 +125,49 @@ public class TareaRepositorioDbImp implements TareaRepositorio {
 
     @Override
     public List<Tarea> buscarCreadaPor(Usuario usuario) {
-        return null;
+
+        List<Tarea> tareas = new ArrayList<>();
+
+
+        String sql = "Select t.*, uc.nombre as nombre_usuario, c.nombre as nombre_cat from tarea t inner join usuario uc on (t.usuario_asignado_id = uc.id) " +
+                "inner join categoria c on (t.categoria_id = c.id) Where t.usuario_creador_id = ? ";
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+        String[] args = {usuario.getId().toString()};
+        Cursor cr = db.rawQuery(sql, args);
+
+        while (cr.moveToNext()){
+            int id = cr.getInt(cr.getColumnIndex("id"));
+            String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+            String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
+            Long fecha = cr.getLong(cr.getColumnIndex(CAMPO_FECHA));
+            String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
+
+
+            Usuario usuarioAsignado = new Usuario();
+            usuarioAsignado.setId(cr.getInt(cr.getColumnIndex(CAMPO_USUARIO_ASIGNADO_ID)));
+            usuarioAsignado.setNombre(cr.getString(cr.getColumnIndex("nombre_usuario")));
+
+            Categoria categoria = new Categoria();
+            categoria.setId(cr.getInt(cr.getColumnIndex(CAMPO_CATEGORIA_ID)));
+            categoria.setNombre(cr.getString(cr.getColumnIndex("nombre_cat")));
+
+            Date fechaCreada = new Date(fecha);
+
+            Tarea t = new Tarea();
+            t.setId(id);
+            t.setNombre(nombre);
+            t.setDescripcion(descripcion);
+            t.setFecha(fechaCreada);
+            t.setEstado(Tarea.TareaEstado.valueOf(estado));
+            t.setUsuarioCreador(usuario);
+            t.setUsuarioAsignado(usuarioAsignado);
+            t.setCategoria(categoria);
+
+            tareas.add(t);
+        }
+
+        cr.close();
+        db.close();
+        return tareas;
     }
 }

@@ -57,7 +57,7 @@ public class TareaAsignarActivity extends AppCompatActivity {
         List<Categoria> categorias = categoriaRepositorio.buscar(null);
         spnCategorias = findViewById(R.id.spnCategoria);
         ArrayAdapter<Categoria> adaptadorCategoria = new ArrayAdapter(this,android.R.layout.simple_spinner_item,categorias);
-        adaptadorCategoria.insert(new Categoria().setNombre("Seleccione una categoria"), 0);
+        adaptadorCategoria.insert(new Categoria().setNombre("Seleccione una categoria").setId(0), 0);
         spnCategorias.setAdapter(adaptadorCategoria);
 
         //Obtiene la Categoria seleccionada
@@ -118,13 +118,13 @@ public class TareaAsignarActivity extends AppCompatActivity {
                 if (txtNombreTarea == null)
                     return;
 
-                else if(txtDescripcionTarea == null)
+                if (txtDescripcionTarea == null)
                     return;
 
-                else if(categoria.getId() == null && categoria.getId() <= 0)
+                if (categoria == null || categoria.getId() <= 0 )
                     return;
 
-                else if(usuarioAsignado.getId() == null && usuarioAsignado.getId() <= 0)
+                if (usuarioAsignado.getId() == null || usuarioAsignado.getId() <= 0)
                     return;
 
                 else {
