@@ -23,7 +23,7 @@
         android:id="@+id/lblUsuarioAsignadoAdaptador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Asignado"
+        android:text="Asignado/Creador por"
         android:textStyle="bold"/>
 
     <LinearLayout

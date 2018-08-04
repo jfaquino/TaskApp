@@ -11,13 +11,13 @@ import java.util.List;
 
 import ado.edu.itla.taskapp.R;
 import ado.edu.itla.taskapp.entidad.Tarea;
-import ado.edu.itla.taskapp.entidad.Usuario;
 
-public class TareaListAdapter extends BaseAdapter{
+public class TareaListAdapterUTecnico extends BaseAdapter {
+
     private Context context;
     private List<Tarea> tareas;
 
-    public TareaListAdapter(Context context, List<Tarea> tareas){
+    public TareaListAdapterUTecnico(Context context, List<Tarea> tareas){
         this.context = context;
         this.tareas = tareas;
     }
@@ -55,7 +55,7 @@ public class TareaListAdapter extends BaseAdapter{
 
         lblFechaTareaAdaptador.setText(ta.getFecha().toString());
         lblDescripcionTareaAdaptador.setText(ta.getDescripcion());
-        lblUsuarioAsignadoAdaptador.setText("Asignado a: "+ta.getUsuarioAsignado().getNombre());
+        lblUsuarioAsignadoAdaptador.setText("Creado por: "+ta.getUsuarioCreador().getNombre());
         lblCategoriaAsignadaAdaptador.setText(ta.getCategoria().getNombre());
         lblEstadoAsignadoAdaptador.setText(ta.getEstado().toString());
 
