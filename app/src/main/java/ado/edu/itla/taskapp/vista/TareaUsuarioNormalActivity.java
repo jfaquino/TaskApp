@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import ado.edu.itla.taskapp.R;
@@ -55,7 +57,8 @@ public class TareaUsuarioNormalActivity extends AppCompatActivity {
             }
         });
 
-        Log.i(LOG_TAG, tareas.get(1).toString());
+//        Log.i(LOG_TAG, tareas.get(1).toString());
+
 
     }
 }

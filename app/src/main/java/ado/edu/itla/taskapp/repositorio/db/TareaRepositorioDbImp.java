@@ -128,7 +128,6 @@ public class TareaRepositorioDbImp implements TareaRepositorio {
 
         List<Tarea> tareas = new ArrayList<>();
 
-
         String sql = "Select t.*, uc.nombre as nombre_usuario, c.nombre as nombre_cat from tarea t inner join usuario uc on (t.usuario_asignado_id = uc.id) " +
                 "inner join categoria c on (t.categoria_id = c.id) Where t.usuario_creador_id = ? ";
         SQLiteDatabase db = conexionDb.getReadableDatabase();

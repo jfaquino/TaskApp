@@ -13,7 +13,7 @@ public class ConexionDb extends SQLiteOpenHelper{
 
     private static final String LOG_TAG = "ConexionDb";
     private static final String NOMBRE_DB = "taskapp.db";
-    private static final int VERSION_DB = 2;
+    private static final int VERSION_DB = 3;
 
     public ConexionDb(Context context) {
         super(context, NOMBRE_DB, null, VERSION_DB);

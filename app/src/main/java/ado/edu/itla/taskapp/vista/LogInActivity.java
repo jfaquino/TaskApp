@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import ado.edu.itla.taskapp.MainActivity;
 import ado.edu.itla.taskapp.R;
 import ado.edu.itla.taskapp.entidad.Usuario;
@@ -27,6 +29,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         usuarioRepositorio = new UsuarioRepositorioDbImp(this);
 
